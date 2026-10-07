@@ -35,7 +35,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
         </p>
       </div>
 
-      <FieldSeparator>or</FieldSeparator>
+      <FieldSeparator className="my-0">or</FieldSeparator>
 
       <DemoLogin emails={emails} />
     </div>

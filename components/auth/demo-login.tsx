@@ -67,12 +67,10 @@ export function DemoLogin({ emails }: { emails: Record<Role, string> }) {
                 <span className={cn("flex size-9 items-center justify-center rounded-xl", tone)}>
                   <Icon className="size-5" aria-hidden />
                 </span>
-                <div className="min-w-0">
-                  <p className="font-semibold leading-tight">{title}</p>
-                  <p className="truncate text-xs text-muted-foreground">{emails[role]}</p>
-                </div>
+                <p className="font-semibold leading-tight">{title}</p>
               </div>
               <p className="mt-3 flex-1 text-sm text-muted-foreground">{summary}</p>
+              <p className="mt-3 font-mono text-[11px] break-all text-muted-foreground">{emails[role]}</p>
               <Button
                 variant="outline"
                 className="mt-4 w-full"

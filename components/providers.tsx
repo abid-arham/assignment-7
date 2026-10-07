@@ -17,7 +17,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           {children}
           <Toaster richColors closeButton position="top-right" />
         </TooltipProvider>
-        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-right" />
       </QueryClientProvider>
     </ThemeProvider>
   );
