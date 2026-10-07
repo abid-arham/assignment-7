@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { CalendarXIcon, SearchXIcon, ShoppingBasketIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -58,15 +58,13 @@ export function RegistrationView() {
     );
   }, [user.id]);
 
-  const planned = useMemo(() => new Set(items.map((i) => i.sectionId)), [items]);
-  const visible = useMemo(() => {
-    const q = filters.q?.toLowerCase();
-    return (sectionsQuery.data ?? [])
-      .filter((s) => !filters.departmentId || s.course.departmentId === filters.departmentId)
-      .filter((s) => !q || s.course.code.toLowerCase().includes(q) || s.course.title.toLowerCase().includes(q))
-      .filter((s) => filters.seats === "all" || s.enrolledCount < s.capacity)
-      .sort((a, b) => a.course.code.localeCompare(b.course.code) || a.sectionCode.localeCompare(b.sectionCode));
-  }, [sectionsQuery.data, filters.departmentId, filters.q, filters.seats]);
+  const planned = new Set(items.map((i) => i.sectionId));
+  const q = filters.q?.toLowerCase();
+  const visible = (sectionsQuery.data ?? [])
+    .filter((s) => !filters.departmentId || s.course.departmentId === filters.departmentId)
+    .filter((s) => !q || s.course.code.toLowerCase().includes(q) || s.course.title.toLowerCase().includes(q))
+    .filter((s) => filters.seats === "all" || s.enrolledCount < s.capacity)
+    .sort((a, b) => a.course.code.localeCompare(b.course.code) || a.sectionCode.localeCompare(b.sectionCode));
 
   if (semestersQuery.data && !semester) {
     return (
