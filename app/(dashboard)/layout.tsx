@@ -26,9 +26,10 @@ export default async function DashboardLayout({ children }: LayoutProps<"/">) {
         <AppSidebar />
         <SidebarInset>
           <DashboardHeader />
-          <main id="main" className="flex-1 px-4 py-6 md:px-6 lg:px-8">
+          {/* SidebarInset is already the <main> landmark. */}
+          <div id="main" className="flex-1 px-4 py-6 md:px-6 lg:px-8">
             <div className="mx-auto w-full max-w-7xl space-y-6">{children}</div>
-          </main>
+          </div>
         </SidebarInset>
       </SidebarProvider>
     </AuthProvider>
