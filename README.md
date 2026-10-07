@@ -113,7 +113,7 @@ pnpm dev                       # http://localhost:3000
 |---|---|---|
 | `API_BASE_URL` | yes | UMS API base URL including `/api/v1` (server-only) |
 | `JWT_ACCESS_SECRET` | yes | Same value as the API's `JWT_ACCESS_SECRET`; `proxy.ts` uses it to verify sessions |
-| `NEXT_PUBLIC_SITE_URL` | yes in production | Public URL of this site (metadata, Open Graph, sitemap) |
+| `FRONT_END_URL` | recommended in production | Public URL of this site (metadata, Open Graph, sitemap). Defaults to the Vercel production domain |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | no | Address used by the contact page |
 | `DEMO_*_EMAIL` / `DEMO_*_PASSWORD` | no | Override the demo-login accounts (defaults match the API seed) |
 
