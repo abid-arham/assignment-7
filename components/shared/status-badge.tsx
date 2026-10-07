@@ -23,6 +23,7 @@ const STATUS: Record<string, { label: string; tone: Tone }> = {
   UNPAID: { label: "Unpaid", tone: "warning" },
   PAID: { label: "Paid", tone: "success" },
   CANCELLED: { label: "Cancelled", tone: "neutral" },
+  NOT_INVOICED: { label: "Not invoiced", tone: "neutral" },
   // payments
   PENDING: { label: "Pending", tone: "warning" },
   SUCCEEDED: { label: "Succeeded", tone: "success" },
@@ -34,7 +35,15 @@ const STATUS: Record<string, { label: string; tone: Tone }> = {
   INACTIVE: { label: "Deactivated", tone: "danger" },
 };
 
-export type StatusValue = EnrollmentStatus | InvoiceStatus | PaymentStatus | "OPEN" | "CLOSED" | "ACTIVE" | "INACTIVE";
+export type StatusValue =
+  | EnrollmentStatus
+  | InvoiceStatus
+  | PaymentStatus
+  | "NOT_INVOICED"
+  | "OPEN"
+  | "CLOSED"
+  | "ACTIVE"
+  | "INACTIVE";
 
 export function StatusBadge({ status, className }: { status: StatusValue; className?: string }) {
   const { label, tone } = STATUS[status] ?? { label: status, tone: "neutral" as const };
