@@ -13,3 +13,8 @@ export const LazyGradeDistributionChart = dynamic(
   () => import("./grade-distribution-chart").then((m) => m.GradeDistributionChart),
   { ssr: false, loading: chartSkeleton },
 );
+
+export const LazyBarListChart = dynamic(() => import("./bar-list-chart").then((m) => m.BarListChart), {
+  ssr: false,
+  loading: chartSkeleton,
+});
