@@ -18,3 +18,13 @@ export const LazyBarListChart = dynamic(() => import("./bar-list-chart").then((m
   ssr: false,
   loading: chartSkeleton,
 });
+
+export const LazyDonutChart = dynamic(() => import("./donut-chart").then((m) => m.DonutChart), {
+  ssr: false,
+  loading: () => <Skeleton className="mx-auto size-64 rounded-full" />,
+});
+
+export const LazyActivityChart = dynamic(() => import("./activity-chart").then((m) => m.ActivityChart), {
+  ssr: false,
+  loading: () => <Skeleton className="h-64 w-full rounded-xl" />,
+});
