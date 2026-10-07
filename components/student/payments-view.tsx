@@ -19,13 +19,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Skeleton } from "@/components/ui/skeleton";
 import { DataTable, type Column } from "@/components/shared/data-table";
 import { EmptyState } from "@/components/shared/empty-state";
+import { LocalTime } from "@/components/shared/local-time";
 import { Spinner } from "@/components/shared/spinner";
 import { StatusBadge } from "@/components/shared/status-badge";
 import { api } from "@/lib/api/client";
 import { getErrorMessage } from "@/lib/api/errors";
 import { queries, queryKeys } from "@/lib/api/queries";
 import type { InvoiceWithSemester, PaymentAttempt, Semester } from "@/lib/api/types";
-import { formatDate, formatDateTime, formatMoney, plural } from "@/lib/format";
+import { formatDate, formatMoney, plural } from "@/lib/format";
 
 interface TermBill {
   semester: Semester;
@@ -135,7 +136,7 @@ function TermCard({ bill }: { bill: TermBill }) {
 }
 
 const historyColumns: Column<PaymentAttempt & { semesterName: string }>[] = [
-  { id: "date", header: "Date", cell: (p) => formatDateTime(p.createdAt) },
+  { id: "date", header: "Date", cell: (p) => <LocalTime value={p.createdAt} /> },
   { id: "term", header: "Semester", cell: (p) => p.semesterName, className: "hidden sm:table-cell" },
   { id: "amount", header: "Amount", cell: (p) => formatMoney(p.amount), align: "right" },
   { id: "status", header: "Status", cell: (p) => <StatusBadge status={p.status} /> },

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LocalTime } from "@/components/shared/local-time";
 import { StatusBadge } from "@/components/shared/status-badge";
 import type { PaymentSummary } from "@/lib/api/types";
-import { formatDateTime, formatMoney } from "@/lib/format";
+import { formatMoney } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 /** Receipt-style card shared by the Stripe success and cancel landing pages. */
@@ -54,7 +55,9 @@ export function PaymentResult({
           {payment.invoice.paidAt && (
             <>
               <dt className="text-muted-foreground">Paid</dt>
-              <dd className="text-right tabular-nums">{formatDateTime(payment.invoice.paidAt)}</dd>
+              <dd className="text-right tabular-nums">
+                <LocalTime value={payment.invoice.paidAt} />
+              </dd>
             </>
           )}
           <dt className="text-muted-foreground">Reference</dt>

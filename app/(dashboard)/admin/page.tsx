@@ -12,11 +12,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { LazyActivityChart, LazyBarListChart, LazyDonutChart } from "@/components/charts/lazy";
+import { LocalTime } from "@/components/shared/local-time";
 import { PageHeader } from "@/components/shared/page-header";
 import { StatCard } from "@/components/shared/stat-card";
 import { serverApi } from "@/lib/api/server";
 import type { AuditLog } from "@/lib/api/types";
-import { formatMoney, formatRelative, humanize } from "@/lib/format";
+import { formatMoney, humanize } from "@/lib/format";
 import { semesterPhase } from "@/lib/semesters";
 
 export const metadata: Metadata = { title: "Admin dashboard" };
@@ -188,7 +189,9 @@ export default async function AdminOverviewPage() {
                       <span className="font-medium">{log.actor?.name ?? "System"}</span> · {humanize(log.action)}
                     </span>
                   </span>
-                  <span className="shrink-0 text-xs text-muted-foreground">{formatRelative(log.createdAt)}</span>
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    <LocalTime value={log.createdAt} mode="relative" />
+                  </span>
                 </li>
               ))}
             </ul>
