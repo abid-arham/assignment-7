@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { GraduationCapIcon, PresentationIcon, RocketIcon, ShieldCheckIcon, type LucideIcon } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/shared/spinner";
@@ -36,11 +37,13 @@ const DEMOS: { role: Role; title: string; summary: string; icon: LucideIcon; ton
 /** `emails` comes from the server-side demo config so the cards always show the account they use. */
 export function DemoLogin({ emails }: { emails: Record<Role, string> }) {
   const [pending, startTransition] = useTransition();
+  const queryClient = useQueryClient();
   const [activeRole, setActiveRole] = useState<Role | null>(null);
 
   const signInAs = (role: Role) => {
     setActiveRole(role);
     startTransition(async () => {
+      queryClient.removeQueries({ queryKey: ["session"] }); // public navbar re-reads who is signed in
       const error = await demoLoginAction(role);
       toast.error("Demo login failed", { description: error.message });
       setActiveRole(null);

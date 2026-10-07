@@ -4,6 +4,7 @@ import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LogInIcon } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
@@ -16,6 +17,7 @@ import { loginSchema, type LoginInput } from "@/lib/validations/auth";
 
 export function LoginForm({ next }: { next?: string }) {
   const [pending, startTransition] = useTransition();
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -30,6 +32,7 @@ export function LoginForm({ next }: { next?: string }) {
   const onSubmit = handleSubmit((values) =>
     startTransition(async () => {
       // Resolves only on failure; on success the action redirects to the role's dashboard.
+      queryClient.removeQueries({ queryKey: ["session"] }); // public navbar re-reads who is signed in
       const error = await loginAction(values, next);
       if (!applyServerErrors(setError, error.fieldErrors, ["email", "password"])) {
         setError("password", { type: "server", message: error.message });

@@ -4,6 +4,7 @@ import { useTransition } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckIcon, UserPlusIcon } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
@@ -19,6 +20,7 @@ const FIELDS = ["name", "email", "password", "confirmPassword"] as const;
 
 export function RegisterForm() {
   const [pending, startTransition] = useTransition();
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -34,6 +36,7 @@ export function RegisterForm() {
 
   const onSubmit = handleSubmit((values) =>
     startTransition(async () => {
+      queryClient.removeQueries({ queryKey: ["session"] }); // public navbar re-reads who is signed in
       const error = await registerAction(values);
       // 409 = email already registered: show it on the email field.
       if (!applyServerErrors(setError, error.fieldErrors, FIELDS) && /email/i.test(error.message)) {
