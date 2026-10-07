@@ -17,7 +17,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { StatCard } from "@/components/shared/stat-card";
 import { serverApi } from "@/lib/api/server";
 import type { AuditLog } from "@/lib/api/types";
-import { formatMoney, humanize } from "@/lib/format";
+import { formatMoney, humanize, plural } from "@/lib/format";
 import { semesterPhase } from "@/lib/semesters";
 
 export const metadata: Metadata = { title: "Admin dashboard" };
@@ -87,8 +87,8 @@ export default async function AdminOverviewPage() {
       />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Students" value={stats.users.STUDENT} hint={`${stats.users.INSTRUCTOR} instructors · ${stats.users.ADMIN} admins`} icon={GraduationCapIcon} />
-        <StatCard label="Active enrollments" value={stats.activeEnrollments} hint={`${stats.sections} sections running`} icon={BookOpenCheckIcon} tone="info" />
+        <StatCard label="Students" value={stats.users.STUDENT} hint={`${plural(stats.users.INSTRUCTOR, "instructor")} · ${plural(stats.users.ADMIN, "admin")}`} icon={GraduationCapIcon} />
+        <StatCard label="Active enrollments" value={stats.activeEnrollments} hint={`${plural(stats.sections, "section")} offered in total`} icon={BookOpenCheckIcon} tone="info" />
         <StatCard label="Courses in catalogue" value={stats.courses} hint={`${departments.length} departments`} icon={LibraryIcon} tone="success" />
         <StatCard
           label="Tuition collected"

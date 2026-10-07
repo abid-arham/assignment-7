@@ -71,9 +71,9 @@ export function UsersView() {
       header: "User",
       cell: (u) => (
         <div className="flex items-center gap-3">
-          <UserAvatar name={u.name} src={u.avatarUrl} />
-          <div className="min-w-0">
-            <p className="font-medium">
+          <UserAvatar name={u.name} src={u.avatarUrl} className="hidden sm:inline-flex" />
+          <div className="min-w-0 max-w-36 sm:max-w-none">
+            <p className="truncate font-medium">
               {u.name} {u.id === me.id && <span className="text-xs text-muted-foreground">(you)</span>}
             </p>
             <p className="truncate text-xs text-muted-foreground">{u.email}</p>
@@ -89,7 +89,7 @@ export function UsersView() {
           <RoleBadge role={u.role} />
         ) : (
           <Select value={u.role} onValueChange={(role) => setPendingRole({ user: u, role: role as Role })}>
-            <SelectTrigger size="sm" className="w-32" aria-label={`Role for ${u.name}`}>
+            <SelectTrigger size="sm" className="w-28 sm:w-32" aria-label={`Role for ${u.name}`}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
