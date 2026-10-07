@@ -1,0 +1,7 @@
+import { requireRole } from "@/lib/api/server";
+
+// proxy.ts already routes by role; this re-check keeps the area safe even if the matcher changes.
+export default async function Layout({ children }: LayoutProps<"/instructor">) {
+  await requireRole("INSTRUCTOR");
+  return children;
+}
