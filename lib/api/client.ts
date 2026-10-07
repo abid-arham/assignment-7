@@ -20,6 +20,8 @@ export function refreshSession(): Promise<number | null> {
 
 function sendToLogin() {
   const next = `${window.location.pathname}${window.location.search}`;
+  // A full page load on purpose: the session is gone, so drop every cached query and client store with it.
+  // eslint-disable-next-line @next/next/no-location-assign-relative-destination
   window.location.assign(`/login?next=${encodeURIComponent(next)}`);
 }
 
