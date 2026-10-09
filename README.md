@@ -4,10 +4,10 @@ Next.js frontend for the [UMS API](https://github.com/abid-arham/assignment-6) (
 
 | | |
 |---|---|
-| Live site | _add the Vercel URL here_ |
+| Live site | https://assignment-7-three-xi.vercel.app/ |
 | Live API | https://assignment-6-tau-wine.vercel.app/api/v1 |
 | Backend repo | https://github.com/abid-arham/assignment-6 |
-| Demo video | _add the link here_ |
+| Demo video |  |
 
 ## Demo accounts
 
