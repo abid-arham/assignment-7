@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FieldSeparator } from "@/components/ui/field";
+import { GoogleButton } from "@/components/auth/google-button";
 import { RegisterForm } from "@/components/auth/register-form";
 
 export const metadata: Metadata = {
@@ -14,6 +16,8 @@ export default function RegisterPage() {
         <h1 className="text-3xl font-semibold sm:text-4xl">Join Quad</h1>
         <p className="text-muted-foreground">Create your student account in under a minute.</p>
       </div>
+      <GoogleButton label="Sign up with Google" />
+      <FieldSeparator className="my-0">or with email</FieldSeparator>
       <RegisterForm />
       <p className="text-center text-sm text-muted-foreground">
         Already have an account?{" "}

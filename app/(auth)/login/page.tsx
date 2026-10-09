@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GoogleButton } from "@/components/auth/google-button";
 import { DemoLogin } from "@/components/auth/demo-login";
 import { LoginForm } from "@/components/auth/login-form";
 import { FieldSeparator } from "@/components/ui/field";
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {
-  const { next } = await searchParams;
+  const { next, error } = await searchParams;
   const emails = {
     ADMIN: DEMO_ACCOUNTS.ADMIN.email,
     STUDENT: DEMO_ACCOUNTS.STUDENT.email,
@@ -26,6 +27,13 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
       </div>
 
       <div className="mx-auto w-full max-w-sm space-y-4">
+        {error === "google" && (
+          <p role="alert" className="rounded-2xl bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            Google sign-in didn&apos;t complete. Try again, or log in with your email.
+          </p>
+        )}
+        <GoogleButton />
+        <FieldSeparator>or with email</FieldSeparator>
         <LoginForm next={typeof next === "string" ? next : undefined} />
         <p className="text-center text-sm text-muted-foreground">
           New student?{" "}
